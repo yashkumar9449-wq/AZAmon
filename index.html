@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AZAMON — Shop everything</title>
+<style>
+:root{--navy:#14213d;--navy2:#203354;--gold:#ffd166;--orange:#f28c28;--ink:#172033;--muted:#687386;--bg:#f3f5f8;--white:#fff;--line:#e5e9ef;--green:#16845b}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+.top{background:var(--navy);color:#fff;padding:13px max(18px,calc((100% - 1200px)/2));display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.logo{font-size:27px;font-weight:900;letter-spacing:-1.5px;color:white;text-decoration:none}.logo span{color:var(--gold)}
+.location{font-size:11px;color:#cbd5e1}.location b{display:block;font-size:13px;color:white;margin-top:3px}
+.search{display:flex;flex:1;min-width:220px;height:42px;border-radius:7px;overflow:hidden}.search select{border:0;background:#e8edf4;padding:0 9px;max-width:115px}.search input{border:0;outline:0;padding:0 13px;flex:1;min-width:50px;font-size:14px}.search button{border:0;background:var(--gold);padding:0 17px;font-size:19px;cursor:pointer}
+.toplink{font-size:12px;white-space:nowrap;color:#eaf0f8}.toplink b{display:block;font-size:14px;color:#fff;margin-top:3px}
+.cartbtn{border:1px solid #63718a;background:transparent;color:white;border-radius:7px;padding:9px 12px;cursor:pointer;font-weight:bold}
+.nav{background:var(--navy2);color:white;padding:10px max(18px,calc((100% - 1200px)/2));display:flex;gap:22px;overflow:auto;white-space:nowrap;font-size:13px}.nav a{color:white;text-decoration:none}
+main{max-width:1200px;margin:auto;padding:20px 18px 55px}
+.hero{background:linear-gradient(115deg,#dceeff,#fff2d8);border-radius:14px;min-height:205px;padding:30px 34px;display:flex;align-items:center;justify-content:space-between;gap:20px;overflow:hidden}
+.hero h1{font-size:clamp(28px,4vw,42px);margin:0 0 10px;color:#14213d}.hero p{margin:0 0 18px;color:#4b5b70}.hero .cta{background:var(--navy);color:#fff;border:0;border-radius:7px;padding:11px 17px;font-weight:bold;cursor:pointer}
+.heroart{font-size:88px;filter:drop-shadow(0 10px 8px #8a9aaa55);padding:0 30px}
+.trust{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0 25px}.trust span{background:white;border:1px solid var(--line);border-radius:8px;padding:10px 13px;font-size:12px;color:#526075}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;margin:25px 0 14px}.sectionhead h2{margin:0;font-size:22px}.sectionhead small{color:var(--muted)}
+.categories{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.cat{background:white;border:1px solid var(--line);border-radius:10px;padding:17px 8px;text-align:center;cursor:pointer;transition:.15s}.cat:hover,.cat.active{border-color:var(--orange);transform:translateY(-2px)}.cat .emoji{font-size:29px;display:block;margin-bottom:8px}.cat b{font-size:13px}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{background:white;border:1px solid var(--line);border-radius:11px;padding:14px;display:flex;flex-direction:column;min-width:0}.productpic{height:150px;border-radius:8px;background:#f5f7fa;display:grid;place-items:center;font-size:66px;margin-bottom:12px}.tag{font-size:10px;color:var(--green);font-weight:bold;text-transform:uppercase;letter-spacing:.5px}.card h3{font-size:14px;line-height:1.4;margin:7px 0;min-height:39px}.rating{color:#e39a18;font-size:12px;margin-bottom:8px}.price{font-size:20px;font-weight:800}.old{font-size:12px;color:#8993a2;text-decoration:line-through;margin-left:6px}.delivery{font-size:11px;color:#657185;margin:7px 0 12px}.add{margin-top:auto;border:0;background:var(--gold);border-radius:20px;padding:9px;font-weight:bold;cursor:pointer}.add:hover{background:#ffc342}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);background:white;padding:35px;border-radius:10px}
+footer{background:var(--navy);color:#d8e1ee;padding:28px 18px;text-align:center;font-size:12px}footer b{color:white;font-size:19px;display:block;margin-bottom:8px}
+.overlay{position:fixed;inset:0;background:#07132688;display:none;justify-content:flex-end;z-index:10}.overlay.show{display:flex}.drawer{background:white;width:min(430px,100%);height:100%;padding:22px;overflow:auto;box-shadow:-10px 0 35px #0002}.drawerhead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px}.drawerhead h2{margin:0}.close{border:0;background:#eef1f5;border-radius:50%;width:34px;height:34px;font-size:20px;cursor:pointer}.cartrow{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid var(--line);align-items:center}.cartemoji{font-size:34px;background:#f3f5f8;border-radius:8px;padding:10px}.cartinfo{flex:1}.cartinfo b{font-size:13px}.cartinfo small{display:block;color:var(--muted);margin-top:5px}.qty{display:flex;align-items:center;gap:8px;margin-top:7px}.qty button{border:1px solid var(--line);background:white;border-radius:5px;width:25px;height:25px;cursor:pointer}.total{display:flex;justify-content:space-between;font-weight:bold;font-size:18px;padding:17px 0}.checkout{width:100%;background:var(--orange);border:0;border-radius:7px;padding:13px;font-weight:bold;cursor:pointer}.note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:12px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#172033;color:white;padding:12px 18px;border-radius:8px;display:none;z-index:20;font-size:13px}.toast.show{display:block}
+@media(max-width:850px){.products{grid-template-columns:repeat(2,1fr)}.categories{grid-template-columns:repeat(3,1fr)}.location,.toplink{display:none}.heroart{font-size:65px;padding:0}}
+@media(max-width:480px){.top{gap:12px}.logo{font-size:23px}.search{order:3;flex-basis:100%}.hero{padding:23px 20px}.heroart{font-size:45px;padding:0}.categories{gap:8px}.cat{padding:13px 5px}.products{gap:9px}.card{padding:10px}.productpic{height:115px;font-size:52px}.card h3{font-size:12px}.price{font-size:17px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="#">AZA<span>MON</span></a>
+  <div class="location">Delivering to<b>India ▾</b></div>
+  <form class="search" id="searchForm"><select aria-label="Category" id="searchCategory"><option value="all">All</option><option>Electronics</option><option>Fashion</option><option>Home</option><option>Books</option><option>Gaming</option></select><input id="searchInput" placeholder="Search AZAMON products..." aria-label="Search products"><button aria-label="Search">⌕</button></form>
+  <div class="toplink">Hello, welcome<b>Account & Lists</b></div>
+  <div class="toplink">Your<b>Orders</b></div>
+  <button class="cartbtn" id="openCart">🛒 Cart (<span id="cartCount">0</span>)</button>
+</header>
+<nav class="nav"><a href="#categories">☰ All</a><a href="#products">Today's Picks</a><a href="#products">Electronics</a><a href="#products">Fashion</a><a href="#products">Home & Kitchen</a><a href="#products">Books</a><a href="#products">Gaming</a></nav>
+<main>
+  <section class="hero">
+    <div><h1>Find your next favourite.</h1><p>Everyday essentials, cool tech and more — all in one place.</p><button class="cta" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">Explore products →</button></div>
+    <div class="heroart" aria-hidden="true">🛍️📦</div>
+  </section>
+  <div class="trust"><span>✓ Easy browsing</span><span>✓ Clear prices</span><span>✓ Simple cart</span><span>Demo store — no real payments</span></div>
+  <div class="sectionhead" id="categories"><h2>Shop by category</h2><small>Choose a department</small></div>
+  <section class="categories">
+    <div class="cat active" data-cat="all"><span class="emoji">✨</span><b>All</b></div>
+    <div class="cat" data-cat="Electronics"><span class="emoji">🎧</span><b>Electronics</b></div>
+    <div class="cat" data-cat="Fashion"><span class="emoji">👟</span><b>Fashion</b></div>
+    <div class="cat" data-cat="Home"><span class="emoji">🏠</span><b>Home</b></div>
+    <div class="cat" data-cat="Books"><span class="emoji">📚</span><b>Books</b></div>
+    <div class="cat" data-cat="Gaming"><span class="emoji">🎮</span><b>Gaming</b></div>
+  </section>
+  <div class="sectionhead" id="products"><h2>Popular picks</h2><small id="resultCount">8 products</small></div>
+  <section class="products" id="productGrid"></section>
+</main>
+<footer><b>AZAMON</b>Shop smart. Keep it simple.<br><br>Independent demo storefront • Not affiliated with Amazon • No real orders or payments</footer>
+<div class="overlay" id="cartOverlay" role="dialog" aria-modal="true" aria-label="Shopping cart">
+ <aside class="drawer">
+  <div class="drawerhead"><h2>Your cart</h2><button class="close" id="closeCart" aria-label="Close cart">×</button></div>
+  <div id="cartItems"></div><div class="total"><span>Subtotal</span><span id="cartTotal">₹0</span></div>
+  <button class="checkout" id="checkout">Continue to demo checkout</button>
+  <p class="note">This is a front-end sample. Checkout does not collect personal information, process payments, or place real orders.</p>
+ </aside>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const products=[
+{id:1,name:"Wireless Bluetooth Headphones",cat:"Electronics",emoji:"🎧",price:1299,old:1999,rating:"★★★★☆ 4.2",tag:"Bestseller"},
+{id:2,name:"Everyday Smart Watch",cat:"Electronics",emoji:"⌚",price:1799,old:2499,rating:"★★★★☆ 4.1",tag:"Popular"},
+{id:3,name:"Classic Everyday Sneakers",cat:"Fashion",emoji:"👟",price:1499,old:2199,rating:"★★★★★ 4.5",tag:"Trending"},
+{id:4,name:"Minimal Desk Lamp",cat:"Home",emoji:"💡",price:699,old:999,rating:"★★★★☆ 4.0",tag:"Great value"},
+{id:5,name:"The Creative Mind — Paperback",cat:"Books",emoji:"📖",price:349,old:499,rating:"★★★★☆ 4.3",tag:"Reader pick"},
+{id:6,name:"Gaming Controller",cat:"Gaming",emoji:"🎮",price:1899,old:2599,rating:"★★★★☆ 4.4",tag:"Popular"},
+{id:7,name:"Compact Bluetooth Speaker",cat:"Electronics",emoji:"🔊",price:899,old:1299,rating:"★★★★☆ 4.1",tag:"New"},
+{id:8,name:"Travel Backpack",cat:"Fashion",emoji:"🎒",price:999,old:1499,rating:"★★★★☆ 4.2",tag:"Everyday pick"}
+];
+let cart={};let activeCat="all";let searchText="";
+const money=n=>"₹"+n.toLocaleString("en-IN");
+function renderProducts(){
+ const list=products.filter(p=>(activeCat==="all"||p.cat===activeCat)&&(p.name.toLowerCase().includes(searchText)||p.cat.toLowerCase().includes(searchText)));
+ document.getElementById("resultCount").textContent=list.length+" products";
+ document.getElementById("productGrid").innerHTML=list.length?list.map(p=>`<article class="card"><div class="productpic">${p.emoji}</div><div class="tag">${p.tag}</div><h3>${p.name}</h3><div class="rating">${p.rating}</div><div><span class="price">${money(p.price)}</span><span class="old">${money(p.old)}</span></div><div class="delivery">Demo listing · India</div><button class="add" onclick="addToCart(${p.id})">Add to cart</button></article>`).join(""):'<div class="empty">No products found. Try another search.</div>';
+}
+function addToCart(id){cart[id]=(cart[id]||0)+1;updateCart();showToast("Added to your cart");}
+function updateCart(){
+ const count=Object.values(cart).reduce((a,b)=>a+b,0);document.getElementById("cartCount").textContent=count;
+ const items=products.filter(p=>cart[p.id]);
+ document.getElementById("cartItems").innerHTML=items.length?items.map(p=>`<div class="cartrow"><div class="cartemoji">${p.emoji}</div><div class="cartinfo"><b>${p.name}</b><small>${money(p.price)} each</small><div class="qty"><button onclick="changeQty(${p.id},-1)">−</button><span>${cart[p.id]}</span><button onclick="changeQty(${p.id},1)">+</button></div></div><b>${money(p.price*cart[p.id])}</b></div>`).join(""):'<div class="empty">Your cart is empty.</div>';
+ document.getElementById("cartTotal").textContent=money(items.reduce((s,p)=>s+p.price*cart[p.id],0));
+}
+function changeQty(id,d){cart[id]+=d;if(cart[id]<=0)delete cart[id];updateCart();}
+function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}
+document.querySelectorAll(".cat").forEach(el=>el.addEventListener("click",()=>{activeCat=el.dataset.cat;document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x===el));document.getElementById("searchCategory").value=activeCat==="all"?"all":activeCat;renderProducts();}));
+document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();searchText=document.getElementById("searchInput").value.trim().toLowerCase();const cat=document.getElementById("searchCategory").value;activeCat=cat==="all"?"all":cat;document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x.dataset.cat===activeCat));renderProducts();});
+document.getElementById("openCart").onclick=()=>document.getElementById("cartOverlay").classList.add("show");
+document.getElementById("closeCart").onclick=()=>document.getElementById("cartOverlay").classList.remove("show");
+document.getElementById("cartOverlay").addEventListener("click",e=>{if(e.target.id==="cartOverlay")e.currentTarget.classList.remove("show")});
+document.getElementById("checkout").onclick=()=>showToast("Demo only — no order or payment was made.");
+renderProducts();updateCart();
+</script>
+</body></html>
